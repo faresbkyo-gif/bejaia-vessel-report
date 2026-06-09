@@ -1,23 +1,26 @@
 import streamlit as st
-
-from scraper import generate_report
+from bejaia_port import get_tables, build_pdf
 
 st.set_page_config(
     page_title="Port of Bejaia",
-    page_icon="🚢",
+    layout="wide"
 )
 
-st.title("🚢 Port of Bejaia")
+st.title("Port of Bejaia Vessel Situation")
 
 st.write(
-    "Generate vessel situation report"
+    "Generate the latest vessel situation report."
 )
 
-if st.button("Generate Report"):
+if st.button("Generate PDF Report"):
 
-    with st.spinner("Generating PDF..."):
+    with st.spinner("Fetching vessel data..."):
 
-        pdf_file = generate_report()
+        tables = get_tables()
+
+        pdf_file = build_pdf(tables)
+
+    st.success("Report generated successfully")
 
     with open(pdf_file, "rb") as f:
 
