@@ -27,9 +27,9 @@ def get_tables():
     )
 
     if response.status_code != 200:
-    raise Exception(
-        f"Status code: {response.status_code}"
-    )
+        raise Exception(
+             f"Status code: {response.status_code}"
+        )
 
     soup = BeautifulSoup(
         response.text,
